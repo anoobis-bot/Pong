@@ -1,6 +1,7 @@
 from turtle import Turtle
 
 LINE_DIST = 15
+LINE_WIDTH = 5
 
 STADIUM_COLOR = "white"
 
@@ -20,7 +21,8 @@ class FieldDrawer(Turtle):
         self.goto(x=0, y=screen_height / 2)
         self.setheading(SOUTH)
         self.color(STADIUM_COLOR)
-        while self.ycor() < -(screen_height / 2):
+        self.width(LINE_WIDTH)
+        while self.ycor() > -(screen_height / 2):
             self.pendown()
             self.forward(LINE_DIST)
             self.penup()

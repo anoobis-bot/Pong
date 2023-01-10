@@ -14,7 +14,10 @@ class Player(Turtle):
         self.shape("square")
         self.color(PLAYER_COLOR)
         self.penup()
-        self.shapesize(stretch_wid=PLAYER_SIZE, stretch_len=0.5)
+        self.stretch_length = 0.5
+        self.string_height = PLAYER_SIZE
+        self.shapesize(stretch_wid=self.string_height, stretch_len=self.stretch_length)
+        self.padding_size = (TURTLE_SIZE * self.stretch_length * 3) * 2
 
         self.player_id = player_id
         self.init_location(screen.window_width())

@@ -40,6 +40,21 @@ class Ball(Turtle):
         else:
             return False
 
+    def on_player(self, player, screen_width):
+        if player.player_id == 1:
+            if self.xcor() <= -(screen_width / 2) + player.padding_size + ((TURTLE_SIZE * player.stretch_length)) \
+                    and (player.ycor() - (TURTLE_SIZE * player.string_height) / 2) <= self.ycor() <= \
+                        (player.ycor() + (TURTLE_SIZE * player.string_height) / 2):
+                return True
+
+        elif player.player_id == 2 or player.player_id == -1:
+            if self.xcor() >= (screen_width / 2) - player.padding_size - ((TURTLE_SIZE * player.stretch_length)) \
+                    and (player.ycor() - (TURTLE_SIZE * player.string_height) / 2) <= self.ycor() <= \
+                        (player.ycor() + (TURTLE_SIZE * player.string_height) / 2):
+                return True
+
+        return False
+
     def bounce_wall(self):
         if EAST < self.heading() < NORTH:
             self.setheading(EAST_360 - self.heading())
