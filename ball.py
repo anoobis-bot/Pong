@@ -23,9 +23,12 @@ class Ball(Turtle):
         self.color("white")
         self.penup()
         self.shapesize(stretch_wid=-STRETCH_FACTOR, stretch_len=STRETCH_FACTOR)
+        self.start_position()
 
-        r = random.choice([(EAST, NORTH - ANGLE_MARGIN), (NORTH + ANGLE_MARGIN, SOUTH - ANGLE_MARGIN),
-                           (SOUTH + ANGLE_MARGIN, EAST_360)])
+    def start_position(self):
+        self.home()
+        r = random.choice([(EAST, NORTH - ANGLE_MARGIN), (NORTH + ANGLE_MARGIN, WEST - 1),
+                           (WEST, SOUTH - ANGLE_MARGIN), (SOUTH + ANGLE_MARGIN, EAST_360)])
         self.setheading(random.randint(*r))
 
     def move_forward(self):

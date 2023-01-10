@@ -23,6 +23,8 @@ class Player(Turtle):
         self.is_bot = -1
         self.bot_direction = 'u'
 
+        self.score = 0
+
     def init_location(self, screen_width):
         if self.player_id == 1:
             self.goto(x=-(screen_width / 2) + (PLAYER_SIZE_PADDING * 2), y=0)
@@ -57,3 +59,5 @@ class Player(Turtle):
             else:
                 self.bot_direction = 'u'
 
+    def increment_score(self):
+        self.score += 1
