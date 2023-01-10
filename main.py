@@ -1,6 +1,7 @@
 import time
 from turtle import Screen
 from player import Player
+from ball import Ball
 
 # Window properties
 SCREEN_WIDTH = 1000
@@ -26,8 +27,15 @@ def main():
 
     player_2.set_bot()
 
+    ball = Ball()
+
     while True:
         player_2.move_bot()
+        ball.move_forward()
+
+        if ball.on_wall(SCREEN_HEIGHT):
+            ball.bounce_wall()
+
         screen.update()
         time.sleep(REFRESH_RATE)
 
