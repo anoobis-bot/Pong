@@ -36,6 +36,14 @@ def main():
         if ball.on_wall(SCREEN_HEIGHT):
             ball.bounce_wall()
 
+        elif player_1.distance(ball) < 30:
+            ball.bounce_player()
+        elif player_2.distance(ball) < 30:
+            ball.bounce_player()
+
+        if abs(ball.xcor()) > SCREEN_WIDTH / 2:
+            ball = Ball()
+
         screen.update()
         time.sleep(REFRESH_RATE)
 

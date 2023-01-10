@@ -51,4 +51,14 @@ class Ball(Turtle):
             self.setheading((self.heading() + 180) % 360)
 
     def bounce_player(self):
-        pass
+        if EAST < self.heading() < NORTH:
+            self.setheading(WEST - self.heading())
+        elif NORTH < self.heading() < WEST:
+            self.setheading(WEST - self.heading())
+        elif WEST < self.heading() < SOUTH:
+            self.setheading(EAST_360 - (self.heading() - WEST))
+        elif SOUTH < self.heading() < EAST_360:
+            self.setheading(EAST_360 - self.heading())
+
+        else:
+            self.setheading((self.heading() + 180) % 360)
