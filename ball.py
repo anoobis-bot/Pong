@@ -42,15 +42,15 @@ class Ball(Turtle):
 
     def on_player(self, player, screen_width):
         if player.player_id == 1:
-            if self.xcor() <= -(screen_width / 2) + player.padding_size + ((TURTLE_SIZE * player.stretch_length)) \
-                    and (player.ycor() - (TURTLE_SIZE * player.string_height) / 2) <= self.ycor() <= \
-                        (player.ycor() + (TURTLE_SIZE * player.string_height) / 2):
+            if self.xcor() <= -(screen_width / 2) + player.padding_size + (TURTLE_SIZE * player.stretch_width) \
+                    and (player.ycor() - (TURTLE_SIZE * player.stretch_height) / 2) <= self.ycor() <= \
+                        (player.ycor() + (TURTLE_SIZE * player.stretch_height) / 2):
                 return True
 
         elif player.player_id == 2 or player.player_id == -1:
-            if self.xcor() >= (screen_width / 2) - player.padding_size - ((TURTLE_SIZE * player.stretch_length)) \
-                    and (player.ycor() - (TURTLE_SIZE * player.string_height) / 2) <= self.ycor() <= \
-                        (player.ycor() + (TURTLE_SIZE * player.string_height) / 2):
+            if self.xcor() >= (screen_width / 2) - player.padding_size - (TURTLE_SIZE * player.stretch_width) \
+                    and (player.ycor() - (TURTLE_SIZE * player.stretch_height) / 2) <= self.ycor() <= \
+                        (player.ycor() + (TURTLE_SIZE * player.stretch_height) / 2):
                 return True
 
         return False

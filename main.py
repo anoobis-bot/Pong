@@ -27,8 +27,6 @@ def main():
     screen.onkeypress(key="Up", fun=player_1.move_up)
     screen.onkeypress(key="Down", fun=player_1.move_down)
 
-    player_2.set_bot()
-
     ball = Ball()
 
     scoreboard_1 = Scoreboard(player_1)
