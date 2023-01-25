@@ -3,7 +3,7 @@ import random
 
 random.seed()
 
-BALL_SPEED = 13
+BALL_SPEED = 3
 
 NORTH = 90
 SOUTH = 270
@@ -42,17 +42,18 @@ class Ball(Turtle):
 
     def on_player(self, player, screen_width):
         if player.player_id == 1:
-            if self.xcor() <= -(screen_width / 2) + player.padding_size + (TURTLE_SIZE * player.stretch_width) \
+            x_paddle_pos = -(screen_width / 2) + player.padding_size + (TURTLE_SIZE * player.stretch_width)
+            if (x_paddle_pos - BALL_SPEED * 2) <= self.xcor() <= x_paddle_pos \
                     and (player.ycor() - (TURTLE_SIZE * player.stretch_height) / 2) <= self.ycor() <= \
                         (player.ycor() + (TURTLE_SIZE * player.stretch_height) / 2):
                 return True
 
         elif player.player_id == 2 or player.player_id == -1:
-            if self.xcor() >= (screen_width / 2) - player.padding_size - (TURTLE_SIZE * player.stretch_width) \
+            x_paddle_pos = (screen_width / 2) - player.padding_size - (TURTLE_SIZE * player.stretch_width)
+            if x_paddle_pos <= self.xcor() <= (x_paddle_pos + BALL_SPEED * 2)  \
                     and (player.ycor() - (TURTLE_SIZE * player.stretch_height) / 2) <= self.ycor() <= \
                         (player.ycor() + (TURTLE_SIZE * player.stretch_height) / 2):
                 return True
-
         return False
 
     def bounce_wall(self):

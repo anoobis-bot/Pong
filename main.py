@@ -10,7 +10,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 SCREEN_COLOR = "black"
 
-REFRESH_RATE = 0.05
+REFRESH_RATE = 0.01
 
 
 def main():
@@ -40,19 +40,27 @@ def main():
 
         if ball.on_wall(SCREEN_HEIGHT):
             ball.bounce_wall()
-        elif ball.on_player(player=player_1, screen_width=SCREEN_WIDTH):
+        elif ball.on_player(player=player_1, screen_width=SCREEN_WIDTH) and player_1.can_hit:
             ball.bounce_player()
-        elif ball.on_player(player=player_2, screen_width=SCREEN_WIDTH):
+            player_1.can_hit = False
+            player_2.can_hit = True
+        elif ball.on_player(player=player_2, screen_width=SCREEN_WIDTH) and player_2.can_hit:
             ball.bounce_player()
+            player_1.can_hit = True
+            player_2.can_hit = False
 
         if ball.xcor() > SCREEN_WIDTH / 2:
             ball.start_position()
             player_1.increment_score()
             scoreboard_1.display_score()
+            player_1.can_hit = True
+            player_2.can_hit = True
         elif ball.xcor() < -(SCREEN_WIDTH / 2):
             ball.start_position()
             player_2.increment_score()
             scoreboard_2.display_score()
+            player_1.can_hit = True
+            player_2.can_hit = True
 
         screen.update()
         time.sleep(REFRESH_RATE)

@@ -8,6 +8,7 @@ PLAYER_SIZE_PADDING = (TURTLE_SIZE / 2) * 3
 
 MOVE_DIST = 15
 """Distance in pixels on how fast the player paddles are moving per refresh"""
+BOT_MOVE_DIST = 5
 
 
 class Player(Turtle):
@@ -35,6 +36,8 @@ class Player(Turtle):
         # See move_bot() method to know how the bot moves
         self.bot_direction = 'u'
 
+        self.can_hit = True
+
         self.score = 0
 
     def init_location(self, screen_width):
@@ -58,13 +61,13 @@ class Player(Turtle):
 
         if self.bot_direction == 'u':
             if self.ycor() < (self.screen_height / 2) - ((TURTLE_SIZE * HEIGHT_STRETCH) / 2):
-                self.sety(self.ycor() + MOVE_DIST)
+                self.sety(self.ycor() + BOT_MOVE_DIST)
             else:
                 self.bot_direction = 'd'
 
         elif self.bot_direction == 'd':
             if self.ycor() > -(self.screen_height / 2) + ((TURTLE_SIZE * HEIGHT_STRETCH) / 2):
-                self.sety(self.ycor() - MOVE_DIST)
+                self.sety(self.ycor() - BOT_MOVE_DIST)
             else:
                 self.bot_direction = 'u'
 
