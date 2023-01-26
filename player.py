@@ -54,18 +54,18 @@ class Player(Turtle):
         if self.ycor() > -(self.screen_height / 2) + ((TURTLE_SIZE * HEIGHT_STRETCH) / 2):
             self.sety(self.ycor() - MOVE_DIST)
 
-    def move_bot(self):
+    def move_bot(self, ball):
         # Since the bot's movement is not dependent on the user's input, it has its' own instructions on how it moves
         if self.player_id != -1:
             return
 
-        if self.bot_direction == 'u':
+        if ball.ycor() > self.ycor() + MOVE_DIST / 2:
             if self.ycor() < (self.screen_height / 2) - ((TURTLE_SIZE * HEIGHT_STRETCH) / 2):
                 self.sety(self.ycor() + BOT_MOVE_DIST)
             else:
                 self.bot_direction = 'd'
 
-        elif self.bot_direction == 'd':
+        elif ball.ycor() < self.ycor() - MOVE_DIST / 2:
             if self.ycor() > -(self.screen_height / 2) + ((TURTLE_SIZE * HEIGHT_STRETCH) / 2):
                 self.sety(self.ycor() - BOT_MOVE_DIST)
             else:

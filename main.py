@@ -32,10 +32,11 @@ def main():
     scoreboard_1 = Scoreboard(player_1)
     scoreboard_2 = Scoreboard(player_2)
 
-    field_drawer = FieldDrawer(SCREEN_HEIGHT)
+    field_drawer = FieldDrawer()
+    field_drawer.draw_stadium(SCREEN_HEIGHT)
 
     while True:
-        player_2.move_bot()
+        player_2.move_bot(ball)
         ball.move_forward()
 
         if ball.on_wall(SCREEN_HEIGHT):
@@ -64,7 +65,6 @@ def main():
 
         screen.update()
         time.sleep(REFRESH_RATE)
-
 
     screen.mainloop()
 
