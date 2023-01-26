@@ -77,7 +77,7 @@ class Ball(Turtle):
         elif WEST < self.heading() < SOUTH:
             self.setheading(EAST_360 - (self.heading() - WEST))
         elif SOUTH < self.heading() < EAST_360:
-            self.setheading(EAST_360 - self.heading())
+            self.setheading(WEST + (EAST_360 - self.heading()))
 
         else:
             self.setheading((self.heading() + 180) % 360)
