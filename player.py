@@ -17,12 +17,11 @@ class Player(Turtle):
         self.shape("square")
         self.color(PLAYER_COLOR)
         self.penup()
-        self.stretch_width = WIDTH_STRETCH
-        self.stretch_height = HEIGHT_STRETCH
-        self.shapesize(stretch_wid=self.stretch_height, stretch_len=self.stretch_width)
+        # read shapesize() docs for the naming convention
+        self.shapesize(stretch_wid=HEIGHT_STRETCH, stretch_len=WIDTH_STRETCH)
         # Padding of the paddle so that they are not at the window's edge
         # See init_location() to see how the paddles are placed into the GUI
-        self.padding_size = (TURTLE_SIZE * self.stretch_width * 3) * 2
+        self.padding_size = (TURTLE_SIZE * WIDTH_STRETCH * 3) * 2
 
         # For the player id system, there could only be 3 possible numbers. -1, 1, 2
         # -1 denotes that the player is a bot
@@ -36,6 +35,7 @@ class Player(Turtle):
         # See move_bot() method to know how the bot moves
         self.bot_direction = 'u'
 
+        # TODO explain can hit functionality
         self.can_hit = True
 
         self.score = 0
@@ -59,6 +59,7 @@ class Player(Turtle):
         if self.player_id != -1:
             return
 
+        # TODO explain bot AI
         if ball.ycor() > self.ycor() + MOVE_DIST / 2:
             if self.ycor() < (self.screen_height / 2) - ((TURTLE_SIZE * HEIGHT_STRETCH) / 2):
                 self.sety(self.ycor() + BOT_MOVE_DIST)
@@ -70,6 +71,19 @@ class Player(Turtle):
                 self.sety(self.ycor() - BOT_MOVE_DIST)
             else:
                 self.bot_direction = 'u'
+
+    def is_hit(self, ball):
+        if not self.can_hit:
+            return False
+
+        half_width_len = ((TURTLE_SIZE * WIDTH_STRETCH) / 2)
+        half_height_len = ((TURTLE_SIZE * HEIGHT_STRETCH) / 2)
+        if self.xcor() - half_width_len <= ball.xcor() <= self.xcor() + half_width_len:
+
+            if self.ycor() - half_height_len <= ball.ycor() <= self.ycor() + half_height_len:
+                return True
+
+        return False
 
     def increment_score(self):
         self.score += 1

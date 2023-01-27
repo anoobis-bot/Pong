@@ -6,6 +6,10 @@ from scoreboard import Scoreboard
 from drawer import FieldDrawer
 
 # Window properties
+# The Screen class defines the coordinate system as follows: It divides the given size of the screen
+# into 2. The negative and the positive. This means that the coordinate of the upper right part of the screen
+# (given a width of 600 and height of 1000) is (300, 500) while the lower left would be (-300, -500) and so on...
+# You would see often pieces of codes that divides the screen height or width by 2
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 SCREEN_COLOR = "black"
@@ -42,25 +46,23 @@ def main():
 
         if ball.on_wall(SCREEN_HEIGHT):
             ball.bounce_wall()
-        # TODO move on player function to player class
-        elif ball.on_player(player=player_1, screen_width=SCREEN_WIDTH) and player_1.can_hit:
+        elif player_1.is_hit(ball):
             ball.bounce_player()
             player_1.can_hit = False
             player_2.can_hit = True
-        elif ball.on_player(player=player_2, screen_width=SCREEN_WIDTH) and player_2.can_hit:
+        elif player_2.is_hit(ball):
             ball.bounce_player()
             player_1.can_hit = True
             player_2.can_hit = False
 
-        # TODO explain coordinate system
         if ball.xcor() > SCREEN_WIDTH / 2:
-            ball.start_position()
+            ball.random_heading_angle()
             player_1.increment_score()
             scoreboard_1.display_score()
             player_1.can_hit = True
             player_2.can_hit = True
         elif ball.xcor() < -(SCREEN_WIDTH / 2):
-            ball.start_position()
+            ball.random_heading_angle()
             player_2.increment_score()
             scoreboard_2.display_score()
             player_1.can_hit = True
