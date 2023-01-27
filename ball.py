@@ -3,8 +3,10 @@ import random
 
 random.seed()
 
+# TODO python docs
 BALL_SPEED = 3
 
+# TODO explain angle system
 NORTH = 90
 SOUTH = 270
 EAST = 0
@@ -23,9 +25,9 @@ class Ball(Turtle):
         self.color("white")
         self.penup()
         self.shapesize(stretch_wid=-STRETCH_FACTOR, stretch_len=STRETCH_FACTOR)
-        self.start_position()
+        self.random_heading_angle()
 
-    def start_position(self):
+    def random_heading_angle(self):
         self.home()
         r = random.choice([(EAST, NORTH - ANGLE_MARGIN), (NORTH + ANGLE_MARGIN, WEST - 1),
                            (WEST, SOUTH - ANGLE_MARGIN), (SOUTH + ANGLE_MARGIN, EAST_360)])
@@ -40,23 +42,8 @@ class Ball(Turtle):
         else:
             return False
 
-    def on_player(self, player, screen_width):
-        if player.player_id == 1:
-            x_paddle_pos = -(screen_width / 2) + player.padding_size + (TURTLE_SIZE * player.stretch_width)
-            if (x_paddle_pos - BALL_SPEED * 2) <= self.xcor() <= x_paddle_pos \
-                    and (player.ycor() - (TURTLE_SIZE * player.stretch_height) / 2) <= self.ycor() <= \
-                        (player.ycor() + (TURTLE_SIZE * player.stretch_height) / 2):
-                return True
-
-        elif player.player_id == 2 or player.player_id == -1:
-            x_paddle_pos = (screen_width / 2) - player.padding_size - (TURTLE_SIZE * player.stretch_width)
-            if x_paddle_pos <= self.xcor() <= (x_paddle_pos + BALL_SPEED * 2)  \
-                    and (player.ycor() - (TURTLE_SIZE * player.stretch_height) / 2) <= self.ycor() <= \
-                        (player.ycor() + (TURTLE_SIZE * player.stretch_height) / 2):
-                return True
-        return False
-
     def bounce_wall(self):
+        # TODO explain algo
         if EAST < self.heading() < NORTH:
             self.setheading(EAST_360 - self.heading())
         elif NORTH < self.heading() < WEST:
@@ -70,6 +57,7 @@ class Ball(Turtle):
             self.setheading((self.heading() + 180) % 360)
 
     def bounce_player(self):
+        # TODO explain algo
         if EAST < self.heading() < NORTH:
             self.setheading(WEST - self.heading())
         elif NORTH < self.heading() < WEST:
