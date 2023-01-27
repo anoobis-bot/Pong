@@ -15,7 +15,7 @@ class FieldDrawer(Turtle):
         self.penup()
         self.color()
 
-    def draw_stadium(self, screen_height):
+    def draw_stadium_lines(self, screen_height):
         self.goto(x=0, y=screen_height / 2)
         self.setheading(SOUTH)
         self.color(STADIUM_COLOR)
