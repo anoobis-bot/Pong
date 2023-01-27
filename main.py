@@ -10,7 +10,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 SCREEN_COLOR = "black"
 
-REFRESH_RATE = 0.01
+REFRESH_RATE = 0.008
 
 
 def main():
@@ -33,14 +33,16 @@ def main():
     scoreboard_2 = Scoreboard(player_2)
 
     field_drawer = FieldDrawer()
-    field_drawer.draw_stadium(SCREEN_HEIGHT)
+    field_drawer.draw_stadium_lines(SCREEN_HEIGHT)
 
+    # no game over condition
     while True:
         player_2.move_bot(ball)
         ball.move_forward()
 
         if ball.on_wall(SCREEN_HEIGHT):
             ball.bounce_wall()
+        # TODO move on player function to player class
         elif ball.on_player(player=player_1, screen_width=SCREEN_WIDTH) and player_1.can_hit:
             ball.bounce_player()
             player_1.can_hit = False
@@ -50,6 +52,7 @@ def main():
             player_1.can_hit = True
             player_2.can_hit = False
 
+        # TODO explain coordinate system
         if ball.xcor() > SCREEN_WIDTH / 2:
             ball.start_position()
             player_1.increment_score()
@@ -66,7 +69,7 @@ def main():
         screen.update()
         time.sleep(REFRESH_RATE)
 
-    screen.mainloop()
+    # screen.mainloop()
 
 
 main()
